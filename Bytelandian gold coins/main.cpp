@@ -12,23 +12,24 @@ vector<int> division = {2, 3, 4};
 void alg(int coin){
     while(!coins.empty()){
         int temp = 0;
-        queue<int> temp_coins = coins;
         int current = coins.front();
         for(int i = 0; i < 3; i++){
             int new_coin = current / division[i];
-            if(small_coins.find(new_coin) == small_coins.end()){
+            if(new_coin != 0){
                 coins.push(new_coin);
-                small_coins.insert(new_coin);
             }
         }
+        coins.pop();
+        queue<int> temp_coins = coins;
         while(!temp_coins.empty()){
+            cout << temp_coins.front() << " ";
             temp += temp_coins.front();
             temp_coins.pop();
         }
+        cout << endl;
         if(temp > max_sum){
             max_sum = temp;
         }
-        coins.pop();
     }
     cout << max_sum << endl;
     return;
